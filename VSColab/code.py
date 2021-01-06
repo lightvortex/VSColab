@@ -12,8 +12,6 @@ def Connect(password):
     subprocess.call('echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config', shell=True)
     get_ipython().system_raw('/usr/sbin/sshd -D &')
     print("Get your authtoken from https://dashboard.ngrok.com/auth")
-    authtoken = getpass.getpass()
-    get_ipython().system_raw('./ngrok authtoken $authtoken')
     url = ngrok.connect(22, 'tcp')
     print('Type in terminal $ ssh root@' + ((str(url).split('"')[1::2])[0]).replace('tcp://', '').replace(':', ' -p '))
     print("\tUsername: root")
